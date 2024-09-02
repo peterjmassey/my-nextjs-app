@@ -1,5 +1,6 @@
 // pages/index.js
 import { useState } from "react";
+const port = process.env.PORT || 8080;
 
 export default function Home() {
   const [phoneNumber, setPhoneNumber] = useState("");
