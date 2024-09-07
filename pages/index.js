@@ -1,6 +1,6 @@
 // pages/index.js
 import { useState } from "react";
-const port = process.env.PORT || 8080;
+require("dotenv").config({ path: "complete_path/.env" });
 
 export default function Home() {
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -34,9 +34,13 @@ export default function Home() {
     }
   };
 
+  const wordy = "Hello, World!";
+
   return (
     <div>
       <h1>Send SMS with Twilio</h1>
+      <h3>{wordy}</h3>
+
       <input
         type="text"
         value={phoneNumber}

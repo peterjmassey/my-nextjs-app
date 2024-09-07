@@ -1,30 +1,36 @@
 // pages/api/send-sms.js
 import twilio from "twilio";
+require("dotenv").config({ path: "complete_path/.env" });
 
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
+const accountSid = process.env.REACT_APP_TWILIO_ACCOUNT_SID;
+const authToken = process.env.REACT_APP_TWILIO_AUTH_TOKEN;
 const client = twilio(accountSid, authToken);
-const port = process.env.PORT || 8080;
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
     // Check if environment variables are loaded correctly
-    console.log("TWILIO_ACCOUNT_SID:", process.env.TWILIO_ACCOUNT_SID);
-    console.log("TWILIO_AUTH_TOKEN:", process.env.TWILIO_AUTH_TOKEN);
-    console.log("TWILIO_PHONE_NUMBER:", process.env.TWILIO_PHONE_NUMBER);
+    console.log(
+      "TWILIO_ACCOUNT_SID:",
+      process.env.REACT_APP_TWILIO_ACCOUNT_SID
+    );
+    console.log("TWILIO_AUTH_TOKEN:", process.env.REACT_APP_TWILIO_AUTH_TOKEN);
+    console.log(
+      "TWILIO_PHONE_NUMBER:",
+      process.env.REACT_APP_TWILIO_PHONE_NUMBER
+    );
 
     const { to, message } = req.body;
 
     try {
       // Ensure you create the Twilio client with correct credentials
       const client = require("twilio")(
-        process.env.TWILIO_ACCOUNT_SID,
-        process.env.TWILIO_AUTH_TOKEN
+        process.env.REACT_APP_TWILIO_ACCOUNT_SID,
+        process.env.REACT_APP_TWILIO_AUTH_TOKEN
       );
 
       const messageResponse = await client.messages.create({
         body: message,
-        from: process.env.TWILIO_PHONE_NUMBER,
+        from: process.env.REACT_APP_TWILIO_PHONE_NUMBER,
         to: to,
       });
 
